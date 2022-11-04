@@ -49,13 +49,13 @@ console.log(Number(str));
 // console.log(String(343534545));
 // console.log(String('78'));
 
-console.log(Boolean(0));
-console.log(Boolean('0'));
-console.log(Boolean(''));
-console.log(Boolean(null));
-console.log(Boolean(undefined));
-console.log(Boolean(NaN));
-console.log(Boolean({}));
+// console.log(Boolean(0));
+// console.log(Boolean('0'));
+// console.log(Boolean(''));
+// console.log(Boolean(null));
+// console.log(Boolean(undefined));
+// console.log(Boolean(NaN));
+// console.log(Boolean({}));
 
 // only 5 falsy values
 
@@ -67,4 +67,37 @@ if (money > 0) {
   console.log('You have ' + money + ' dollars!');
 } else {
   console.log('You should get a job!');
+}
+
+// loose equality
+// console.log('18' == 18);
+
+// strict equality
+// console.log('23' === 23);
+
+const day = 'tue';
+
+switch (day) {
+  case 'mon':
+  case 'tue':
+    console.log('Monday And Tuesday');
+  // break;
+  case 'wed':
+    console.log('Wednesday');
+  // break;
+  case 'thus':
+    console.log('Thursday');
+    break;
+  case 'fri':
+    console.log('Friday');
+    break;
+  case 'sat':
+    console.log('Saturday');
+    break;
+  case 'sun':
+    console.log('Sunday');
+    break;
+  default:
+    console.log('Not a valid day!');
+    break;
 }

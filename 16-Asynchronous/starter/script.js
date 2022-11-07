@@ -78,8 +78,16 @@ const renderCountry = data => {
   countriesContainer.style.opacity = 1;
 };
 
+const renderError = function (err) {
+  countriesContainer.insertAdjacentText(
+    'beforeend',
+    ` Something went wrong! ${err?.message}` || ' Error occurred'
+  );
+  countriesContainer.style.opacity = 1;
+};
+
 const getCountryData = () => {
-  fetch('https://restcountries.com/v3.1/name/denmark')
+  fetch('https://restcountries.com/v3.1/name/taiwan')
     .then(response => {
       console.log(response);
       return response.json();
@@ -91,7 +99,7 @@ const getCountryData = () => {
     })
     .then(data => console.log(data))
     .then(() => {
-      return fetch('https://restcountries.com/v3.1/name/india');
+      return fetch('https://restcountries.com/v3.1/name/jamaica');
     })
     .then(response => {
       console.log(response);
@@ -101,7 +109,13 @@ const getCountryData = () => {
       console.log(response);
       renderCountry(response[0]);
       return 23;
-    });
+    })
+    .catch(err => {
+      renderError(err);
+    })
+    .finally(() => {});
 };
 
-getCountryData();
+btn.addEventListener('click', () => {
+  getCountryData();
+});

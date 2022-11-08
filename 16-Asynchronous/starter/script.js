@@ -61,15 +61,14 @@ const countriesContainer = document.querySelector('.countries');
 const renderCountry = data => {
   const html = `
     <article class="country">
-      <img class="country__img" src="${data?.flags?.png || ''}" />
       <div class="country__data">
-        <h3 class="country__name">${data?.name?.common || ''}</h3>
-        <h4 class="country__region">${data?.region || ''}</h4>
-        <p class="country__row"><span>👫</span>${
-          (+data?.population / 1000000).toFixed(2) + '  people'
+        <h3 class="country__name">${data?.address?.city || ''}</h3>
+        <h4 class="country__region">${data?.country || ''}</h4>
+        <p class="country__row"><span>💰</span> ${
+          (+data?.lat).toFixed(2) + ' latitude'
         }</p>
-        <p class="country__row"><span>💰</span>${
-          data?.currencies?.INR?.name || ''
+        <p class="country__row"><span>💰</span> ${
+          data?.place_id + ' place id'
         }</p>
       </div>
     </article>
@@ -102,7 +101,11 @@ const getCountryData = () => {
       return fetch('https://restcountries.com/v3.1/name/jamaica');
     })
     .then(response => {
-      console.log(response);
+      console.log(response, 'AFTER THIS');
+
+      if (!response.ok) {
+        throw new Error(' Response not found');
+      }
       return response.json();
     })
     .then(response => {
@@ -111,11 +114,47 @@ const getCountryData = () => {
       return 23;
     })
     .catch(err => {
+      console.log('error occured');
       renderError(err);
     })
     .finally(() => {});
 };
 
+//challenge
+
+const testData = {
+  0: { lat: 37.0902, lng: 95.7129 },
+  1: { lat: 52.508, lng: 13.381 },
+  2: { lat: 19.037, lng: 72.873 },
+  3: { lat: -33.933, lng: 18.474 },
+};
+
+const accessToken = 'pk.83d402f7bc2eb4478b94786c08917e95';
+
+const challengeTask = coordinates => {
+  return fetch(
+    `https://us1.locationiq.com/v1/reverse?key=${accessToken}&lat=${coordinates.lat}&lon=${coordinates.lng}&format=json`
+  )
+    .then(response => {
+      console.log(response);
+      if (!response.ok) throw new Error('Country not found');
+      return response.json();
+    })
+    .then(response => {
+      renderCountry(response);
+      console.log(response);
+    })
+    .catch(err => {
+      renderError(err);
+    });
+};
+
 btn.addEventListener('click', () => {
-  getCountryData();
+  challengeTask(testData['1'])
+    .then(() => challengeTask(testData['2']))
+    .then(() => {
+      setTimeout(() => {
+        challengeTask(testData['3']);
+      }, 2000);
+    });
 });

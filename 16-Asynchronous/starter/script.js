@@ -151,26 +151,38 @@ const challengeTask = coordinates => {
 
 btn.addEventListener('click', () => {
   challengeTask(testData['1'])
-    .then(() => challengeTask(testData['2']))
+    .then(() => challengeTask(testData['3']))
     .then(() => {
       setTimeout(() => {
-        challengeTask(testData['3']);
+        challengeTask(testData['2']);
       }, 2000);
     });
 });
 
-console.log('Start log');
+// console.log('Start log');
 
-setTimeout(() => {
-  console.log('0 second timer ');
-}, 0);
+// setTimeout(() => {
+//   console.log('0 second timer ');
+// }, 0);
 
-Promise.resolve('Resolved promise').then(res => console.log(res));
+// Promise.resolve('Resolved promise').then(res => console.log(res));
 
-Promise.resolve('Resolved Promise 2').then(res => {
-  for (let i = 0; i < 1000000000; i++) {}
-  console.log(res);
-});
-console.log('End log');
+// Promise.resolve('Resolved Promise 2').then(res => {
+//   for (let i = 0; i < 1000000000; i++) {}
+//   console.log(res);
+// });
+// console.log('End log');
 
 // code outside callbacks, any kind of callback executes first
+
+const l = new Promise((resolve, reject) => {
+  const val = Math.random();
+  console.log(val);
+  if (val >= 0.5) {
+    resolve('You WIN');
+  } else {
+    reject('You LOSE');
+  }
+});
+
+l.then(res => console.log(res)).catch(err => console.log(err));

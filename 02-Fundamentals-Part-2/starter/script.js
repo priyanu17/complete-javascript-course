@@ -47,3 +47,30 @@ const checkWinner = function (s1, s2, s3, b1, b2, b3) {
 };
 
 // checkWinner(89, 74, 23, 45, 223, 232);
+
+// arrays
+const friends = ['friend1', 'friend2', 'friend3'];
+console.log(friends);
+
+const arr = new Array(2343, 23423, 23, 'sdf');
+
+console.log(arr);
+
+console.log(friends[0], friends[2]);
+
+const anu = {
+  firstName: 'Anu',
+  lastName: 'Priya',
+  birthYear: 1996,
+  salary: 625000,
+  dob: '17/09/1996',
+  location: 'India',
+  'twitter - handle ': 'anu',
+  calcAge: function (birthYear) {
+    console.log(this);
+    return 2022 - birthYear;
+  },
+};
+
+console.log(anu);
+console.log(anu['calcAge'](1996));
